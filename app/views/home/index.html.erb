@@ -1,0 +1,175 @@
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+		jQuery("#masterSwitch").on('change',function() {
+		   window.location = "/?enable_shop="+jQuery(this).is(':checked');
+		});
+		if(jQuery("#masterSwitch").attr('value') == 'true'){
+			jQuery("#masterSwitch").attr('checked', true)
+		}else{
+			jQuery("#masterSwitch").attr('checked', false)
+		}
+	});
+</script>
+
+<div class="row">
+	<div class="col-sm-8 mid-col" style="padding-right: 0;">
+		<section class="banner">
+			<div class="banner-message text-center">
+				<h1>Hello, <%=ShopifyAPI::Shop.current.shop_owner if @shop.present?%></h1>
+				<p>Welcome to Variant Image Automator</p>
+				<p class="small">
+					Handcrafted by <strong>StarApps</strong>
+				</p>
+			</div>
+		</section>
+		<section class="setup-wrapper wrapper-padding">
+			<div class="card">
+				<div class="row" style="margin: 0">
+					<div class="col-sm-4" id="videoTrigger" title="Play video" style="padding-left: 0; padding-right: 0;">
+					    <%= image_tag 'video_thumb.png', class: 'img-responsive video-thumb'%>
+					</div>
+					<div class="col-sm-12 video-player" id="videoPlayer">
+						<span id="closeVideo" class="close">x</span>
+						<iframe width="100%" height="450" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="col-sm-8" id="videoInfo">
+						<div class="card-inner">
+							<h3 class="card-header">Setting up the app and products</h3>
+							<p>
+								This app will automatically hide images of variants not selected, after you arrange the variant images in order. Take a quick minute to learn how to arrange the product images and then it's on autopilot! 
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="faq-wrapper wrapper-padding">
+			<div class="card">
+				<div class="card-inner">
+					<h3 class="card-header">Frequently Asked Questions (FAQs)</h3>
+					<ul class="faq-list">
+						<li>
+							<strong>Do i Need to change any liquid file or manually install a code?</strong>
+							<p>
+								No, Variant Image Automator App doesn’t require any modification in theme files.
+							</p>
+						</li>
+						<li>
+							<strong>Which themes do you support?</strong>
+							<p>
+								The following themes are known to work with Variant Image Automator.
+								Responsive, Retina, District, Focal, Atlantic, Symmetry, Blockshop, Vantage, Sunrise, Mr Parker, ShowTime, Fashionopolism, Startup, Canopy, Editions, Expression, Envy, Colors, Alchemy, Label, Launch, Flow.
+								<br/><br/>
+								We are actively working to add more themes in the list, If your theme is not listed or you are having trouble with installation, send us an email to apps@starapps.studio ad we'll try our best to make it work for you.
+							</p>
+						</li>
+						<li>
+							<strong>I have products with different type of options, will that be an issue?</strong>
+							<p>
+								Absolutely not, the app supports upto 3 options in a product. It doesn’t matter how many different type of options you provide for different products, the app handles all of them automatically.
+							</p>
+						</li>
+						<li>
+							<strong>I have multiple images for each variant, is there any maximum limit that I can use?</strong>
+							<p>
+								No, you can use as many image for a variant as you wish.
+							</p>
+						</li>
+						<li>
+							<strong>Will this app reduce performance of my website or increase page load time?</strong>
+							<p>
+								We add a very small code in your product page and keep interactions with our server at minimum, this will not increase your page load time or affect performance.
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</div>
+	<div class="col-sm-4 right-col" style="padding-left: 0;">
+		<div class="side-wrap">
+			<div class="sidebar-wrapper">
+				<ul class="sidebar-items">
+					<li>
+						<h3 class="card-header">
+							Loving the App ?
+							<%= image_tag 'heart.png'%>
+						</h3>
+						<p>
+							Why not <a href="#">leave us a positive review!</a><br/>
+							They're the main way we get recognized, and we give high-fives when we get one!
+						</p>
+					</li>
+					<li>
+						<h3 class="card-header">
+							Say Hello :)
+						</h3>
+						<p>
+							If you have a Question/ want to send us a Feedback/ need a new Feature/ want to report a Bug, send us an email to <a href="mailTo:hello@starapps.studio">hello@starapps.studio</a>
+						</p>
+					</li>
+					<li>
+						<h3 class="card-header">
+							Pricing & Plans:
+						</h3>
+						<p>
+							<% if @plan_activeded %>
+								You are currently on Unlimited Plan. 
+								Your billing cycle for the app is DDth of every month.
+								Read more about app billing cycle.
+							<%else%>
+								You are currently on <strong>Free Plan</strong>. Your billing will start when you have more than 30 products in the store.
+								<br/><br/>
+							<%end%>
+						</p>
+					</li>
+					<li>
+						<% if @product_count <= 30 || @plan_activeded%>
+							<h3 class="card-header">
+								Master Switch
+							</h3>
+							<div class="toggle-wrapper">
+
+								<span class="toggle-text" id="ms-di">Disable</span>
+								<div class="toggle-btn">
+									<% if @shop.present? %>
+										<% if @shop.enable %>
+											<input type="checkbox" id="masterSwitch" name="masterSwitch" value='true' checked="true">
+										<% else %>
+											<input type="checkbox" id="masterSwitch" name="masterSwitch" value=''>
+										<% end %>
+									<% end %>
+									<div class="toggle">
+										<label for="masterSwitch"><i></i></label>
+									</div>
+								</div>
+								<span class="toggle-text" id="ms-en">Enable</span>
+							</div>
+							<p>
+								You can use this switch to disable the app in case you are not ready yet.<br/><br/>
+								We recommend disabling the app using this switch in case your variant images are not displaying properly and you need our help.
+							</p>
+						<%else%>
+							<h3 class="card-header">
+								Manage Plan
+							</h3>
+							<div class="toggle-wrapper">
+								<%= link_to 'Active Plan', plan_active_path()%>
+							</div>
+						<%end%>
+					</li>
+				</ul>
+			</div>
+			<div class="sidebar-info text-center">
+				<strong>Need Help</strong>
+				<p>
+					Send us an email to <a href="mailTo:hello@starapps.studio">hello@starapps.studio</a>
+				</p>
+				<div class="small">
+					&copy;2017 Starfruit Solution LLP All Rights Reserved.
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

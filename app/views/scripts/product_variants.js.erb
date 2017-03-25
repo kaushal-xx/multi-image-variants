@@ -1,0 +1,473 @@
+<% if @shop.present? && @shop.enable == true%>
+	function change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		jQuery.each(product_images, function( index, image ) {
+		  if( image.src.indexOf('.jpg') > -1){
+		    var par_url = image.src.split('.jpg?')[0];
+		  }else{
+		  	var par_url = image.src.split('.png?')[0];
+		  }
+		  var obj = jQuery("img[src*='"+par_url.replace('https:','')+"']");
+		  if(jQuery.inArray(image, variant_images) !== -1){
+		    obj.parent().show()
+		  }else{
+		    obj.parent().hide();
+		  }
+		})
+	}
+
+	function capital_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		images = "";
+		jQuery("#multi-variant-info img").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('image_id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    images = images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		jQuery('.product-thumbnails div').html(images);
+		jQuery('.product-thumbnails div img:first').trigger('click');
+	}
+
+	function parallax_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		slide_images = "";
+		jQuery("#multi-variant-info-1 li").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('image_id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    slide_images = slide_images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		jQuery('.product_slider .slides').html(slide_images);
+		jQuery('.product_slider ol.flex-control-nav').remove()
+		destroySlider($('.product_slider'))
+		product.init()
+	}
+
+	function vantage_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		slide_images = "";
+		jQuery("#multi-variant-info li").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('image_id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    slide_images = slide_images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		slide_images = "<div class='slide-gallery'><ul class='slides'>"+slide_images+"</ul></div>";
+		jQuery('#product-images').html(slide_images);
+		$('.slide-gallery').flexslider({
+		  animation: "fade",
+		  slideshow: false,
+		  animationLoop:true,
+		  controlNav: false,
+		  directionNav: true,
+		  prevText: "",
+		  nextText: ""
+		});
+	}
+
+	function colors_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		images = "";
+		jQuery("#multi-variant-info a").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('image_id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    images = images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		jQuery('.product-images .gallery').html(images);
+		jQuery('.product-images .gallery a:first').trigger('click');
+	}
+
+	function canopy_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		images = "";
+		jQuery("#multi-variant-info a").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('image_id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    images = images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		jQuery('.product-gallery .thumbnails').html(images);
+		jQuery('.product-gallery .thumbnails a:first').trigger('click');
+	}
+
+	function startup_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		images = "";
+		jQuery("#multi-variant-info img").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('image_id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    images = images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		jQuery('.product-thumbnails').html(images);
+		jQuery('.product-thumbnails img:first').trigger('click');
+	}
+
+	function providence_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		images = "";
+		jQuery("#multi-variant-info .secondary-image").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('image_id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    images = images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		jQuery('.secondary-images .small-item-grid-2').html(images);
+		jQuery('.secondary-images .small-item-grid-2 .secondary-image:first a').trigger('click');
+	}
+	function mobilia_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		images = "";
+		jQuery("#multi-variant-info li").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('image_id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    images = images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		jQuery('.flexslider .flex-viewport ul.slides').html(images);
+		jQuery('.flex-control-nav.flex-control-thumbs img:first').trigger('click');
+	}
+
+	function focal_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		jQuery.each(product_images, function( index, image ) {
+		  if( image.src.indexOf('.jpg') > -1){
+		    var par_url = image.src.split('.jpg?')[0];
+		  }else{
+		  	var par_url = image.src.split('.png?')[0];
+		  }
+		  var obj = jQuery("img[src*='"+par_url.replace('https:','')+"']");
+		  if(jQuery.inArray(image, variant_images) !== -1){
+		    obj.show()
+		  }else{
+		    obj.hide();
+		  }
+		})
+		jQuery('.product__slideshow--nav img:visible:first').trigger('click');
+	}
+
+	function lunch_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		images = "";
+		jQuery("#multi-variant-info a").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('image_id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    images = images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		jQuery('.product-slideshow-pagination').html(images);
+		jQuery('.product-slideshow-pagination a:first').trigger('click');
+	}
+
+	function testament_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		images = "";
+		jQuery("#multi-variant-info .slide").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('image_id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    images = images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		jQuery('.thumbnail-slider').html(images);
+		jQuery('.thumbnail-slider .slide:first a').trigger('click');
+	}
+
+	function kagami_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		images = "";
+		jQuery("#multi-variant-info .product__slideshow-slide").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('data-image-id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    images = images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		gal_images = ''
+		jQuery("#multi-variant-info-gal div").each(function( index, gal ) {
+		  image_id = jQuery(gal).attr('data-image-id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    gal_images = gal_images + jQuery(gal).clone().wrap('<div></div>').parent().html();
+			  }
+		  });
+		})
+		jQuery('.product__slideshow .slick-track').html(images);
+		jQuery('.product-collage-gallery .ftg-items').html(gal_images);
+		jQuery('.product-collage-gallery .ftg-items:first img').trigger('click');
+	}
+
+	function sunrice_change_images(){
+		default_variant = Object.keys(variants)[0];
+		variant_id = jQuery("select option[value='"+default_variant+"']").parent().val();
+		variant_images = variants[variant_id];
+		images = "";
+		jQuery('#multi-variant-info .owl-item').each(function( index, gal ) {
+		  image_id = jQuery(gal).find('a').first().attr('data-image-id');
+		  jQuery.each(variant_images, function( v_index, v_image ) {
+			  if(image_id == v_image.id){
+			    images = images + jQuery(gal).html();
+			  }
+		  });
+		})
+		jQuery('#more-images').html(images);
+		var owl = jQuery('.owl-carousel:first').data('owlCarousel').destroy();
+		Sunrise.init();
+		jQuery('.owl-carousel:first .owl-item:first a').trigger('click');
+		jQuery(".owl-carousel:first .owl-wrapper").css('transform', "translate3d(0px, 0px, 0px)");
+	}
+
+	if(window.location.href.toLowerCase().indexOf("/products/") >= 0){
+		variants = {}
+		all_variant_images = {}
+		product_images = []
+		jQuery.getJSON( "/products/"+window.location.href.split('/').slice(-1)[0], function( data ) {
+		  var product = data.product;
+		  product_images = product.images;
+		  var varinat_image_ids = jQuery.map( product.variants, function( n, i ) {
+		    return n.image_id;
+		  });
+		  var product = data.product
+		  jQuery.each(product.variants, function( index, varant ) {
+		  variants[varant.id] = [];
+		  all_variant_images[varant.id] = [];
+		  if(varant.image_id != null){
+		    var enable_image = false;
+		    jQuery.each(product.images, function( index, image ) {
+		      if(image.id == varant.image_id){
+		        variants[varant.id].push(image)
+				if( image.src.indexOf('.jpg') > -1){
+					var image_key = image.src.split('/products/')[1].split('.jpg')[0];
+				}else{
+					var image_key = image.src.split('/products/')[1].split('.png')[0];
+				}
+		        all_variant_images[varant.id].push(image_key)
+		        enable_image = true
+		      }else{
+		        if(enable_image == true){
+		          if(jQuery.inArray(image.id, varinat_image_ids) !== -1){
+		            enable_image = false
+		          }else{
+					if( image.src.indexOf('.jpg') > -1){
+						var image_key = image.src.split('/products/')[1].split('.jpg')[0];
+					}else{
+						var image_key = image.src.split('/products/')[1].split('.png')[0];
+					}
+		            variants[varant.id].push(image)
+		            all_variant_images[varant.id].push(image_key)
+		          }
+		        }
+		      }
+		    });
+		  }
+		  });
+		  var default_set = true;
+		  if(Shopify.theme.name == 'Launch'){
+			jQuery(".product-slideshow-pagination a").each(function(index, obj){
+				jQuery(obj).attr('image_id', product_images[index].id)
+			})
+			jQuery('body').append("<div id='multi-variant-info' style='display:none'></div>");
+			jQuery("#multi-variant-info").html(jQuery('.product-slideshow-pagination').html());
+		  	lunch_change_images();
+		  	jQuery("select").on('change',function() {
+				lunch_change_images();
+			})
+			default_set = false;
+		  }
+		  if(Shopify.theme.name == 'Parallax' || Shopify.theme.name == 'Mobilia'){
+			jQuery(".product_slider ol li").each(function(index, obj){
+				jQuery(obj).attr('image_id', product_images[index].id)
+			})
+			count = 0;
+			jQuery(".product_slider .slides li").each(function(index, obj){
+				if(jQuery(obj).hasClass( "clone" ) == false){
+					jQuery(obj).attr('image_id', product_images[count].id)
+					count = count + 1;
+				}
+			})
+			jQuery('body').append("<div id='multi-variant-info' style='display:none'></div>");
+			jQuery('body').append("<div id='multi-variant-info-1' style='display:none'></div>");
+			jQuery("#multi-variant-info").html(jQuery('.product_slider ol').html());
+		  	jQuery("#multi-variant-info-1").html(jQuery('.product_slider .slides').html());
+		  	parallax_change_images();
+		  	jQuery("select").on('change',function() {
+				parallax_change_images();
+			})
+			default_set = false;
+		  }
+
+		  if(Shopify.theme.name == 'Vantage'){
+			jQuery("#product-images .slides li").each(function(index, obj){
+				jQuery(obj).attr('image_id', product_images[index].id)
+			})
+			jQuery('body').append("<div id='multi-variant-info' style='display:none'></div>");
+			jQuery("#multi-variant-info").html(jQuery("#product-images .slides").html());
+		  	vantage_change_images();
+		  	jQuery("select").on('change',function() {
+		  		setTimeout(function(){ vantage_change_images(); }, 500);
+			})
+			default_set = false;
+		  }
+
+		  if(Shopify.theme.name == 'Providence'){
+			jQuery(".secondary-images .item.secondary-image").each(function(index, obj){
+				jQuery(obj).attr('image_id', product_images[index].id)
+			})
+			jQuery('body').append("<div id='multi-variant-info' style='display:none'></div>");
+			jQuery("#multi-variant-info").html(jQuery('.secondary-images .small-item-grid-2').html());
+		  	providence_change_images();
+		  	jQuery("select").on('change',function() {
+				providence_change_images();
+			})
+			default_set = false;
+		  }
+
+		  if(Shopify.theme.name == 'Capital'){
+			jQuery(".product-thumbnails img").each(function(index, obj){
+				jQuery(obj).attr('image_id', product_images[index].id)
+			})
+			jQuery('body').append("<div id='multi-variant-info' style='display:none'></div>");
+			jQuery("#multi-variant-info").html(jQuery('.product-thumbnails div').html());
+		  	capital_change_images();
+		  	jQuery("select").on('change',function() {
+				capital_change_images();
+			})
+			default_set = false;
+		  }
+
+		  if(Shopify.theme.name == 'Colors'){
+			jQuery(".product-images .gallery a").each(function(index, obj){
+				jQuery(obj).attr('image_id', product_images[index].id)
+			})
+			jQuery('body').append("<div id='multi-variant-info' style='display:none'></div>");
+			jQuery("#multi-variant-info").html(jQuery('.product-images .gallery').html());
+		  	colors_change_images();
+		  	jQuery("form.product-form").on('click',function() {
+				colors_change_images();
+			})
+			default_set = false;
+		  }
+
+		  if(Shopify.theme.name == 'Startup'){
+			jQuery(".product-thumbnails img").each(function(index, obj){
+				jQuery(obj).attr('image_id', product_images[index].id)
+			})
+			jQuery('body').append("<div id='multi-variant-info' style='display:none'></div>");
+			jQuery("#multi-variant-info").html(jQuery('.product-thumbnails').html());
+		  	startup_change_images();
+		  	jQuery("select").on('change',function() {
+				startup_change_images();
+			})
+			default_set = false;
+		  }
+		  if(Shopify.theme.name == 'Canopy'){
+			jQuery(".product-gallery .thumbnails a").each(function(index, obj){
+				jQuery(obj).attr('image_id', product_images[index].id)
+			})
+			jQuery('body').append("<div id='multi-variant-info' style='display:none'></div>");
+			jQuery("#multi-variant-info").html(jQuery('.product-gallery .thumbnails').html());
+		  	canopy_change_images();
+		  	jQuery("select").on('change',function() {
+				canopy_change_images();
+			})
+			default_set = false;
+		  }
+		  if(Shopify.theme.name == 'Kagami'){
+			jQuery(".product-collage-gallery .ftg-items div").each(function(index, obj){
+				jQuery(obj).attr('image_id', product_images[index].id)
+			})
+			jQuery('body').append("<div id='multi-variant-info-gal' style='display:none'></div>");
+			jQuery("#multi-variant-info-gal").html(jQuery('.product-collage-gallery .ftg-items').html());
+			jQuery('body').append("<div id='multi-variant-info' style='display:none'></div>");
+			jQuery("#multi-variant-info").html(jQuery('.product__slideshow .slick-track').html());
+		  	kagami_change_images();
+		  	jQuery("select").on('change',function() {
+				kagami_change_images();
+			})
+			default_set = false;
+		  }
+		  if(Shopify.theme.name == 'Testament'){
+			jQuery(".thumbnail-slider .slide").each(function(index, obj){
+				jQuery(obj).attr('image_id', product_images[index].id)
+			})
+			jQuery('body').append("<div id='multi-variant-info' style='display:none'></div>");
+			jQuery("#multi-variant-info").html(jQuery('.thumbnail-slider').html());
+		  	testament_change_images();
+		  	jQuery("select").on('change',function() {
+				testament_change_images();
+			})
+			default_set = false;
+		  }
+		  if(Shopify.theme.name == 'Focal'){
+		  	focal_change_images();
+		  	jQuery("select").on('change',function() {
+				setTimeout(function(){ focal_change_images(); }, 500);
+			})
+			default_set = false;
+		  }
+		  if(typeof(Sunrise) != "undefined"){
+			jQuery('body').append("<div id='multi-variant-info' style='display:none'></div>");
+			jQuery("#multi-variant-info").html(jQuery('.owl-wrapper-outer .owl-wrapper').parent().html());
+			sunrice_change_images();
+			jQuery("select").on('change',function() {
+				sunrice_change_images();
+			})
+			default_set = false;
+		  }
+		  if(default_set == true){
+			change_images();
+			jQuery("select").on('change',function() {
+				setTimeout(function(){ change_images(); }, 500);
+			})
+		  }
+		});
+	}
+<% end %>
